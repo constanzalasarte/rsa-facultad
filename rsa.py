@@ -1,10 +1,11 @@
+import random
 from math import gcd
 from sympy import mod_inverse
 
 
 def get_e_value(phi):
-    for e in range(1, phi):
-        # This is the formula to check if e is coprime with phi
+    while True:
+        e = random.randint(2, phi - 1)
         if gcd(e, phi) == 1:
             return e
 
