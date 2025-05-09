@@ -9,6 +9,16 @@ def get_e_value(phi):
         if gcd(e, phi) == 1:
             return e
 
+def custom_pow(base: int, exp: int, mod: int) -> int:
+    result = 1
+    base = base % mod
+    while exp > 0:
+        if exp & 1:
+            result = (result * base) % mod
+        exp = exp >> 1
+        base = (base * base) % mod
+    return result
+
 
 class RSAKeyPair:
     def __init__(self, p, q):
@@ -29,7 +39,7 @@ class RSAKeyPair:
 
 def encrypt(message, public_key):
     n, e = public_key
-    return pow(message, e, n)
+    return custom_pow(message, e, n)
 
 
 def generate_keypair(p, q):
